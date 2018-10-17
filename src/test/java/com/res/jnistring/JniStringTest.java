@@ -4,18 +4,25 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+
+import com.res.jnistring.jni.JniString;
+import com.res.jnistring.util.PerfTime;
+
 /**
  * Unit test for simple App.
  */
 public class JniStringTest 
     extends TestCase
 {
-    /**
+    private static PerfTime perfT = new PerfTime(JniStringTest.class.getName());
+	
+	/**
      * Create the test case
      *
      * @param testName name of the test case
      */
-    public JniStringTest( String testName )
+
+	public JniStringTest( String testName )
     {
         super( testName );
     }
@@ -33,6 +40,10 @@ public class JniStringTest
      */
     public void testApp()
     {
-        assertTrue( true );
+        
+    	
+    	
+    	
+    	assertTrue( true );
     }
 }

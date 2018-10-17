@@ -32,7 +32,9 @@ public class JniString {
 	   }
 	
 	
-	
+	public String getS() { return this.s;}
+    
+	public void setS(String s) { this.s = s; }
     
     public void print() {  this.print(s);  }
     
@@ -40,9 +42,10 @@ public class JniString {
     
     public boolean equals(String s1) { return this.equals(s, s1);  }
  
-    public String concat(String s1){
-    	s = this.concat(s,s1);
-    	return s;
+    public JniString concat(String s1){
+    	
+    	return new JniString( this.concat(s,s1));
+    
     	}
     
     public byte[] bytes() { return this.bytes(s); }
@@ -50,7 +53,7 @@ public class JniString {
     public String[] split(String regex) { return this.split(s, regex);  }
     
     // should return a TreeSet
-    public Set<String> toSet() { return this.toSet(s);}
+    public Set<JniString> toSet() { return this.toSet(s);}
 
     private native void print(String s1);
 	private native void println(String s1);
@@ -61,7 +64,7 @@ public class JniString {
     private native String[] split(String s1, String regex);
     
     
-    private native Set<String> toSet(String s1);
+    private native Set<JniString> toSet(String s1);
 
 
    
