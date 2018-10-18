@@ -1,11 +1,13 @@
-#include "/jni-string/src/main/java/com/res/jnistring/com_res_jnistring_jni_JniString.h"
-#include "avlarray/avl_array.h"
-#include <algorithm>
+#include <jni.h>
+#include "../java/com/res/jnistring/com_res_jnistring_jni_JniString.h"
+//#include "avlarray/avl_array.h"
+//#include <algorithm>
 #include <stdio.h>
 #include <stdlib.h>
-#include <cstring>
-#include <vector>
-#include <regex>
+#include <string.h>
+#include "jnistringImpl.h"
+//#include <vector>
+//#include <regex>
 
 
 
@@ -17,7 +19,7 @@
  */
 JNIEXPORT void JNICALL Java_com_res_jnistring_jni_JniString_print
   (JNIEnv * env, jobject obj, jstring s){
-    const char *p = malloc(255*sizeof(char));
+    const char *p = (char*)malloc(255*sizeof(char));
     strcpy(p,(*env)->GetStringUTFChars(env, s, 0));
 	print(p);
 	free(p);
@@ -31,7 +33,7 @@ JNIEXPORT void JNICALL Java_com_res_jnistring_jni_JniString_print
  */
 JNIEXPORT void JNICALL Java_com_res_jnistring_jni_JniString_println
   (JNIEnv *env, jobject obj, jstring s){
-	const char *p = malloc(255*sizeof(char));
+	const char *p = (char*) malloc(255*sizeof(char));
 	strcpy(p,(*env)->GetStringUTFChars(env, s, 0));
 	println(p);
 	free(p);
@@ -45,12 +47,12 @@ JNIEXPORT void JNICALL Java_com_res_jnistring_jni_JniString_println
  */
 JNIEXPORT jboolean JNICALL Java_com_res_jnistring_jni_JniString_equals
   (JNIEnv * env, jobject obj, jstring s1, jstring s2){
-	const char *p1 = malloc(255*sizeof(char));
+	const char *p1 = (char *) malloc(255*sizeof(char));
 	strcpy(p1,(*env)->GetStringUTFChars(env, s1, 0));
-	const char *p2 =  malloc(255*sizeof(char));
+	const char *p2 =  (char *) malloc(255*sizeof(char));
 	strcpy(p2,(*env)->GetStringUTFChars(env, s2, 0));
 
-	 jboolean b = equals(p1,p2);
+	 jboolean b = (jboolean) equals(p1,p2);
 
 	 free(p1);
 	 free(p2);
@@ -65,9 +67,9 @@ JNIEXPORT jboolean JNICALL Java_com_res_jnistring_jni_JniString_equals
 JNIEXPORT jstring JNICALL Java_com_res_jnistring_jni_JniString_concat
   (JNIEnv *env, jobject obj, jstring s1, jstring s2){
 
-	const char *p1 = malloc(255*sizeof(char));
+	const char *p1 = (char *) malloc(255*sizeof(char));
 	strcpy(p1,(*env)->GetStringUTFChars(env, s1, 0));
-	const char *p2 =  malloc(255*sizeof(char));
+	const char *p2 =  (char *) malloc(255*sizeof(char));
 	strcpy(p2,(*env)->GetStringUTFChars(env, s2, 0));
 
     const char *p = concat(p1,p2);
@@ -76,7 +78,7 @@ JNIEXPORT jstring JNICALL Java_com_res_jnistring_jni_JniString_concat
     free(p2);
 
     jstring r = malloc(255*sizeof(jstring));
-    (*env)-> (*env).ReleaseStringUTFChars(r, p);
+    (*env)->ReleaseStringUTFChars(env,r, p);
     free(p);
     return r;
 
@@ -91,7 +93,7 @@ JNIEXPORT jstring JNICALL Java_com_res_jnistring_jni_JniString_concat
  */
 JNIEXPORT jint JNICALL Java_com_res_jnistring_jni_JniString_indexOf
   (JNIEnv * env, jobject obj, jstring s, jchar c){
-	const char *p = malloc(255*sizeof(char));
+	const char *p = (char *) malloc(255*sizeof(char));
 	strcpy(p, (*env)->GetStringUTFChars(env, s, 0));
 
 	jbyte b = (jbyte) c; //casting from UTF 16b to UTF 8b
@@ -130,7 +132,7 @@ JNIEXPORT jint JNICALL Java_com_res_jnistring_jni_JniString_indexOf
 JNIEXPORT jbyteArray JNICALL Java_com_res_jnistring_jni_JniString_bytes
   (JNIEnv *env, jobject obj, jstring s){
 
-	const char *p = malloc(255*sizeof(char));
+	const char *p = (char *) malloc(255*sizeof(char));
     jbyteArray b = bytes(env,p);
     free(p);
 	return b;
@@ -147,9 +149,9 @@ JNIEXPORT jobjectArray JNICALL Java_com_res_jnistring_jni_JniString_split
 
 
     jobjectArray sres = NULL;
-	const char *p = malloc(255*sizeof(char));
+	const char *p = (char *) malloc(255*sizeof(char));
 	strcpy(p,(*env)->GetStringUTFChars(env, s1, 0));
-	const char *rs = malloc(255*sizeof(char));
+	const char *rs = (char *) malloc(255*sizeof(char));
 	strcpy(rs,(*env)->GetStringUTFChars(env, s2, 0));
     sres = split(env,p,rs);
 	return sres;
@@ -161,7 +163,8 @@ JNIEXPORT jobjectArray JNICALL Java_com_res_jnistring_jni_JniString_split
  * Method:    toSet
  * Signature: (Ljava/lang/String;)Ljava/util/Set;
  */
-JNIEXPORT jobject JNICALL Java_com_res_jnistring_jni_JniString_toSet
+/*JNIEXPORT jobject JNICALL Java_com_res_jnistring_jni_JniString_toSet
   (JNIEnv *, jobject, jstring){
 
 }
+*/

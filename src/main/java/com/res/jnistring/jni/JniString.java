@@ -26,7 +26,7 @@ public class JniString {
 		   this.hc = this.hashCode();
 		   log = Logger.getLogger(JniString.class.getName()+ "-" + this.hc);
 		   FileSystem  fsys = FileSystems.getDefault();
-		   Path p = fsys.getPath("libjnistring.so");
+		   Path p = fsys.getPath("src/main/cpp/libjnistring.so");
 		   System.load(p.toAbsolutePath().toString());
 		   
 	   }

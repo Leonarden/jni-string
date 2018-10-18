@@ -40,7 +40,13 @@ public class JniStringTest
      */
     public void testApp()
     {
+    	JniString ji = new JniString("This is a sentence");
         
+    	System.out.println("Print function");
+        perfT.startNano();
+        ji.print();
+        perfT.endNano();
+        System.out.println("End Print: " + perfT.getPerfTimeStr());
     	
     	
     	
